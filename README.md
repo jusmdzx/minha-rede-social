@@ -24,7 +24,10 @@ O projeto conta com diversas interatividades persistentes (os dados não somem a
 
 ## 📸 Screenshots
 
-*(Tire prints do seu projeto - um no modo claro e outro no modo escuro - e coloque aqui depois se quiser)*
+ 
+![What![![WhatsApp Image 2026-01-12 at 14 25 31 (2)](https://github.com/user-attachments/assets/af384fc6-3f05-4362-95c0-f257a7a728e4)
+WhatsApp Image 2026-01-12 at 14 25 31 (1)](https://github.com/user-attachments/assets/cec6b384-a8b4-4175-82db-12fd2406ac61)
+sApp Image 2026-01-12 at 14 25 31](https://github.com/user-attachments/assets/629bd1e9-87f5-474b-8b27-eefb92e59dbc)
 
 ## 📂 Como rodar localmente
 
