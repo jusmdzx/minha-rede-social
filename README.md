@@ -2,7 +2,7 @@
 
 Uma simulação funcional de uma rede social com design mobile-first, desenvolvida para praticar manipulação de DOM e armazenamento local.
 
-🔗 **[Clique aqui para testar o projeto online]( https://jusmdzx.github.io/minha-rede-social/)**
+🔗 **[Clique aqui para testar o projeto online] ( https://jusmdzx.github.io/minha-rede-social/)**
 
 ## 🚀 Funcionalidades
 
