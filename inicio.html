@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed - Rede Social</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- DEFINIÇÃO DE CORES (O Segredo do Dark Mode) --- */
+        :root {
+            /* Cores do Modo Claro (Padrão) */
+            --bg-body: #e9ebee;
+            --bg-card: #ffffff;
+            --text-main: #333333;
+            --text-secondary: #666666;
+            --border-color: #dddddd;
+            --input-bg: #f9f9f9;
+            --header-bg: #6200ea;
+            --shadow: rgba(0,0,0,0.05);
+        }
+
+        /* Cores do Modo Escuro (Quando a classe .dark-mode for ativada) */
+        body.dark-mode {
+            --bg-body: #18191a;        /* Fundo bem escuro (estilo Facebook) */
+            --bg-card: #242526;        /* Cartões um pouco mais claros */
+            --text-main: #e4e6eb;      /* Texto quase branco */
+            --text-secondary: #b0b3b8; /* Texto cinza claro */
+            --border-color: #3e4042;   /* Bordas escuras */
+            --input-bg: #3a3b3c;       /* Inputs escuros */
+            --header-bg: #4a00e0;      /* Roxo um pouco mais fechado */
+            --shadow: rgba(0,0,0,0.3);
+        }
+
+        /* --- Reset e Base --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: var(--bg-body); /* Usa a variável! */
+            color: var(--text-main);
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            transition: background 0.3s, color 0.3s; /* Animação suave na troca */
+        }
+
+        /* --- Container Principal --- */
+        .app { 
+            width: 375px; 
+            height: 667px; 
+            background: var(--bg-card); /* Fundo do app muda tb */
+            border-radius: 20px; 
+            overflow: hidden; 
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); 
+            border: 8px solid #333; 
+            display: flex; 
+            flex-direction: column; 
+            position: relative; 
+        }
+
+        /* --- Header --- */
+        .header { 
+            background-color: var(--header-bg); 
+            color: white; 
+            text-align: center; 
+            padding: 15px 20px; 
+            display: flex; 
+            justify-content: space-between; /* Espalha os itens */
+            align-items: center; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+            flex-shrink: 0; 
+        }
+        
+        .header-logo { 
+            width: 35px; 
+            height: 35px; 
+            background: white; 
+            border-radius: 50%; 
+            padding: 4px; 
+            object-fit: contain;
+        }
+
+        /* Botão do Tema */
+        .theme-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px;
+            transition: transform 0.2s;
+        }
+        .theme-btn:hover { transform: scale(1.1); }
+        
+        /* --- Conteúdo Principal --- */
+        .main { 
+            padding: 15px; 
+            flex: 1; 
+            overflow-y: auto; 
+            background-color: var(--bg-body); 
+        }
+        .main::-webkit-scrollbar { width: 5px; }
+        .main::-webkit-scrollbar-thumb { background: var(--text-secondary); border-radius: 10px; }
+
+        /* --- Criar Post --- */
+        .create-post { 
+            background: var(--bg-card); 
+            padding: 15px; 
+            border-radius: 10px; 
+            margin-bottom: 20px; 
+            box-shadow: 0 2px 5px var(--shadow); 
+            border: 1px solid var(--border-color);
+        }
+        .create-post input[type="text"], 
+        .create-post textarea { 
+            width: 100%; 
+            padding: 10px; 
+            margin: 5px 0; 
+            border: 1px solid var(--border-color); 
+            border-radius: 8px; 
+            font-family: inherit; 
+            background: var(--input-bg); 
+            color: var(--text-main);
+        }
+        .create-post textarea { resize: none; height: 60px; }
+        
+        .file-input-wrapper { display: flex; align-items: center; margin-bottom: 10px; }
+        
+        .custom-file-upload { 
+            display: inline-block; 
+            padding: 6px 12px; 
+            cursor: pointer; 
+            color: #6200ea; /* Mantive roxo para destaque */
+            font-size: 0.9rem; 
+            font-weight: bold; 
+        }
+        body.dark-mode .custom-file-upload { color: #bb86fc; } /* Roxo mais claro no dark mode */
+        
+        .create-post button { 
+            width: 100%; 
+            padding: 10px; 
+            border: none; 
+            border-radius: 8px; 
+            background-color: var(--header-bg); 
+            color: white; 
+            font-size: 1rem; 
+            cursor: pointer; 
+            font-weight: bold; 
+        }
+
+        /* --- Feed e Posts --- */
+        .feed h2 { font-size: 1rem; margin-bottom: 10px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; }
+        .posts { display: flex; flex-direction: column; gap: 15px; }
+        
+        .post { 
+            background: var(--bg-card); 
+            padding: 15px; 
+            border-radius: 10px; 
+            box-shadow: 0 2px 4px var(--shadow); 
+            border: 1px solid var(--border-color);
+        }
+        
+        .post-header-row { display: flex; justify-content: space-between; align-items: center; }
+        .post-user-name { font-weight: bold; color: var(--text-main); font-size: 1.1rem; }
+        
+        .delete-btn { background: none; border: none; color: #ff4444; cursor: pointer; font-size: 0.9rem; padding: 5px; opacity: 0.5; }
+        .delete-btn:hover { opacity: 1; }
+        
+        .timestamp { font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 8px; margin-top: -2px; }
+        .content { margin: 10px 0; font-size: 0.95rem; line-height: 1.4; color: var(--text-main); }
+        
+        .post img { 
+            width: 100%; 
+            border-radius: 8px; 
+            margin-top: 10px; 
+            border: 1px solid var(--border-color); 
+            max-height: 300px; 
+            object-fit: cover; 
+        }
+        
+        .actions { 
+            display: flex; 
+            justify-content: space-between; 
+            margin-top: 15px; 
+            padding-top: 10px; 
+            border-top: 1px solid var(--border-color); 
+            color: var(--text-secondary); 
+            font-size: 0.9rem; 
+        }
+        .actions button { background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 5px; font-size: 1rem; color: inherit; }
+
+        /* --- Menu Inferior --- */
+        .bottom-nav { 
+            height: 60px; 
+            background: var(--bg-card); 
+            display: flex; 
+            justify-content: space-around; 
+            align-items: center; 
+            border-top: 1px solid var(--border-color); 
+            flex-shrink: 0; 
+        }
+        .bottom-nav i { font-size: 1.2rem; color: var(--text-secondary); cursor: pointer; }
+        .bottom-nav i.active { color: var(--header-bg); }
+    </style>
+</head>
+<body>
+
+    <div class="app">
+        <header class="header">
+            <i class="fa-solid fa-arrow-left" style="cursor: pointer; font-size: 1.2rem;" onclick="window.location.href='index.html'" title="Sair"></i>
+            
+            <h1>Minha Rede</h1>
+            
+            <button class="theme-btn" onclick="toggleTheme()" id="theme-btn-icon">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </header>
+
+        <main class="main">
+            <section class="create-post">
+                <input type="text" id="username" placeholder="Seu @usuario" />
+                <textarea id="postContent" placeholder="O que você está pensando?"></textarea>
+                
+                <div class="file-input-wrapper">
+                    <label for="postImage" class="custom-file-upload">
+                        <i class="fa-solid fa-image"></i> Adicionar Foto
+                    </label>
+                    <input type="file" id="postImage" accept="image/*" onchange="updateFileName()" />
+                    <span id="file-name" style="font-size: 12px; color: var(--text-secondary); margin-left: 10px;"></span>
+                </div>
+
+                <button onclick="addPost()">Publicar</button>
+            </section>
+
+            <section class="feed">
+                <h2>Feed Recente</h2>
+                <div class="posts" id="posts">
+                    </div>
+            </section>
+        </main>
+
+        <nav class="bottom-nav">
+            <i class="fa-solid fa-house active" onclick="window.location.reload()"></i>
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <i class="fa-solid fa-bell"></i>
+            <i class="fa-solid fa-user"></i>
+        </nav>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
