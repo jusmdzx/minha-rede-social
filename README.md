@@ -24,10 +24,17 @@ O projeto conta com diversas interatividades persistentes (os dados não somem a
 
 ## 📸 Screenshots
 
- 
-![What![![WhatsApp Image 2026-01-12 at 14 25 31 (2)](https://github.com/user-attachments/assets/af384fc6-3f05-4362-95c0-f257a7a728e4)
-WhatsApp Image 2026-01-12 at 14 25 31 (1)](https://github.com/user-attachments/assets/cec6b384-a8b4-4175-82db-12fd2406ac61)
-sApp Image 2026-01-12 at 14 25 31](https://github.com/user-attachments/assets/629bd1e9-87f5-474b-8b27-eefb92e59dbc)
+![WhatsApp Image 2026-01-12 at 14 25 31](https://github.com/user-attachments/assets/f6b47d8a-bf6f-495f-a7de-5387a6186b00)
+
+
+
+![WhatsApp Image 2026-01-12 at 14 25 31 (1)](https://github.com/user-attachments/assets/fbb5110d-7498-429f-9bdb-1ecaedd6b224)
+
+
+![WhatsApp Image 2026-01-12 at 14 25 31 (2)](https://github.com/user-attachments/assets/a6890dfa-028e-419f-84e0-348adadaf426)
+
+
+ 
 
 ## 📂 Como rodar localmente
 
